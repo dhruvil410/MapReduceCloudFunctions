@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <div class="form-group">
+            {{ form.query.label(class="form-control-label") }}
+
+            {% if form.query.errors %}
+                {{ form.query(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.query.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.query(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+    </fieldset>
+    <div class="form-group">
+        {{ form.search(class="btn btn-outline-info") }}
+    </div>
+</form>
+{% for result in top_10_results %}
+    <div class="card" style="width: 68rem;">
+        <div class="card-body">
+            <h5 class="card-title"> <a href="{{ result.view_url }}"> {{ result.title }} </a> </h5>
+            <h6 class="card-subtitle mb-2 text-muted"><b>Author:</b> {{ result.author}} &emsp; <b>Subject:</b> {{ result.subject }}</h6>
+        </div>
+</div>
+{% endfor %}
+{% endblock content %}
